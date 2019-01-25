@@ -7,21 +7,13 @@
 @date: Jan 24, 2019
 """
 
-import sys 
+import sys
 
-
-# print list without brackets
-def return_list(list):
-	tmp_dict = {}
-	for i in list:
-		tmp_dict[str(i)] = 1
-	list_join = ",".join(tmp_dict)
-	return list_join
 
 
 bed_file = sys.argv[1]
 
-# read file 
+# read file
 with open(bed_file) as file:
 	bed6 = file.readlines()
 
@@ -53,26 +45,31 @@ for gene in sorted(my_dict.keys()):
 		exon_start.append( int(exon_features[1]) )
 		exon_end.append( int(exon_features[2]) )
 
-	# sort exon positions, exons couldn't overlap!!!! 
+	# sort exon positions, exons couldn't overlap!!!!
 	exon_start.sort()
 	exon_end.sort()
 
-	# calculate length and relative start each exon 
+	# calculate length and relative start each exon
 	exon_len = []
 	exon_rela_start = []
 	for i in range(len(exon_start)):
 		exon_len.append( exon_end[i] - exon_start[i] )
 		exon_rela_start.append( exon_start[i] - exon_start[0] )
 
-	# print standard BED12 format 
-	print(chrom, exon_start[0], exon_end[-1], gene_id, ".", strand, 
-		exon_start[0], exon_end[-1], '255,0,0', len(exon_start), return_list(exon_len), return_list(exon_rela_start), sep = '\t')
+	# print standard BED12 format
+	print(chrom, exon_start[0], exon_end[-1], gene_id, ".", strand,
+		exon_start[0], exon_end[-1], '255,0,0', len(exon_start), sep='\t', end='\t')
 
+	for i in exon_len:
+		print(i, end='')
+		if i != exon_len[-1]:
+			print(',',end='')
 
+	print("\t", end='')
 
+	for i in exon_rela_start:
+		print(i, end='')
+		if i != exon_rela_start[-1]:
+			print(',',end='')
 
-
-
-
-
-
+	print('')
