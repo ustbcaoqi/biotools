@@ -60,16 +60,16 @@ for gene in sorted(my_dict.keys()):
 	print(chrom, exon_start[0], exon_end[-1], gene_id, ".", strand,
 		exon_start[0], exon_end[-1], '255,0,0', len(exon_start), sep='\t', end='\t')
 
-	for i in exon_len:
-		print(i, end='')
-		if i != exon_len[-1]:
+	for i in range(len(exon_len)):
+		print(exon_len[i], end='')
+		if (i+1) != len(exon_len):
 			print(',',end='')
 
 	print("\t", end='')
 
-	for i in exon_rela_start:
-		print(i, end='')
-		if i != exon_rela_start[-1]:
+	for i in range(len(exon_rela_start)):
+		print(exon_rela_start[i], end='')
+		if (i+1) != len(exon_rela_start):
 			print(',',end='')
 
 	print('')
