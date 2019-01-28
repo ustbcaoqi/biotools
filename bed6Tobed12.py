@@ -57,7 +57,7 @@ for gene in sorted(my_dict.keys()):
 		exon_rela_start.append( exon_start[i] - exon_start[0] )
 
 	# print standard BED12 format
-	print(chrom, exon_start[0], exon_end[-1], gene_id, ".", strand,
+	print(chrom, exon_start[0], exon_end[-1], gene_id, '0', strand,
 		exon_start[0], exon_end[-1], '255,0,0', len(exon_start), sep='\t', end='\t')
 
 	for i in range(len(exon_len)):
